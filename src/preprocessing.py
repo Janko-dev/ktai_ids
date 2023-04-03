@@ -1,3 +1,4 @@
+from __future__ import annotations
 import numpy as np
 import pandas as pd
 
@@ -17,29 +18,19 @@ def apply_clamping(df: pd.DataFrame, limit: float = 10, reduction_quantile: floa
     return df
 
 
-def reduce_top_n(df: pd.DataFrame, n: int = 6) -> pd.DataFrame:
+def reduce_top_n(df: pd.DataFrame, n_map: dict[str, int]) -> pd.DataFrame:
     """
     To avoid the curse of dimensionality, we reduce categories of categorical features in provided dataframe to the top *n* features.
     """
     cat_cols = df.select_dtypes(exclude=[np.number]).columns
 
     for feature in cat_cols:
-        if df[feature].nunique() > n:
-            top_n = df[feature].value_counts().head(n).index
-            df[feature] = np.where(
-                df[feature].isin(top_n), 
-                df[feature], 
-                '-')
+        top_n = df[feature].value_counts().index[:n_map[feature]]
+        df[feature] = np.where(
+            df[feature].isin(top_n), 
+            df[feature], 
+            '-')
     
     return df
 
-
-def feature_selection_top_n(df: pd.DataFrame, n: int) -> pd.DataFrame:
-    df = reduce_top_n(df, n)
-
-    num_cols = df.select_dtypes(include=[np.number]).columns
-    cat_cols = df.select_dtypes(exclude=[np.number]).columns
-    df = pd.concat([df[num_cols], pd.get_dummies(df[cat_cols])], axis=1)
-
-    df = apply_clamping(df)
     
