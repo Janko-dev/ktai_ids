@@ -1,2 +1,2 @@
-model_checkpoint_path: "model_dnn_mc_topn.ckpt"
-all_model_checkpoint_paths: "model_dnn_mc_topn.ckpt"
+model_checkpoint_path: "model_dnn_b_topn.ckpt"
+all_model_checkpoint_paths: "model_dnn_b_topn.ckpt"
