@@ -1,0 +1,12 @@
+{"batch_size": 296,
+ "dropout": 0.8616525561059741,
+ "dropout_rate": 0.2942475563821516,
+ "epochs": 137,
+ "layer2": 0.9229434419602413,
+ "layer3": 0.5145623135225855,
+ "layer4": 0.741083057050981,
+ "neurons_l1": 27,
+ "neurons_l2": 173,
+ "neurons_l3": 151,
+ "neurons_l4": 21,
+ "normalization": 0.80849875291906}
